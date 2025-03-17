@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+@use "tailwindcss";
+
+
+@font-face {
+    font-family: 'Josefin-regular';
+    src: url('/fonts/JosefinSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --header-height: 3rem;
+    --sidebar-width: 12rem;
+
+    --background: hsl(0 0% 100%);
+    --foreground: hsl(240 10% 3.9%);
+    --primary: hsl(240 5.9% 10%);
+    --primary-foreground: hsl(0 0% 98%);
+    --secondary: hsl(240 4.8% 95.9%);
+    --secondary-foreground: hsl(240 5.9% 10%);
+}
+
+@theme {
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+}
+
+body {
+    font-family: 'Josefin-regular', sans-serif;
+    overflow-y: hidden;
+}
+
+pre {
+    @apply whitespace-normal;
+}
+
+code {
+    @apply block p-3;
+}
