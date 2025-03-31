@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { InstallationStepComponent } from './installation-step/installation-step.component';
+import CodeHighlighterComponent from '../../components/code-highlighter/code-highlighter.component';
 
 @Component({
   selector: 'app-installation',
@@ -20,36 +21,83 @@ import { InstallationStepComponent } from './installation-step/installation-step
         An existing Angular project or a new one created using Angular CLI.
       </li>
     </ul>
-
-    <!-- <table
-      class="w-1/2 mx-auto text-sm text-left rtl:text-right text-gray-500 mt-6 border border-slate-200 border-separate"
-    >
-      <thead class="text-xs text-gray-700 bg-gray-50 ">
-        <tr>
-          <th scope="col" class="px-6 py-3">Ng intro</th>
-          <th scope="col" class="px-6 py-3">Angular</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-          <td class="px-6 py-4">0.1.x</td>
-          <td class="px-6 py-4">17.x</td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-          <td class="px-6 py-4">0.2.x</td>
-          <td class="px-6 py-4">18.x</td>
-        </tr>
-        <tr class="odd:bg-white even:bg-gray-50 border-b border-gray-200">
-          <td class="px-6 py-4">0.3.x</td>
-          <td class="px-6 py-4">19.x</td>
-        </tr>
-      </tbody>
-    </table> -->
     <br />
     <app-installation-step [stepNumber]="1">
       <span slot="title">Step 1 - Installation</span>
+      <app-code-highlighter [code]="installationCode"></app-code-highlighter>
+    </app-installation-step>
+    <app-installation-step [stepNumber]="2">
+      <span slot="title"
+        >Step 2 - Provide NgxIntroService and Configure Settings</span
+      >
+      <ng-container slot="description">
+        To use ngx-intro, provide NgxIntroService in your app.config.ts and
+        configure the settings as needed.
+      </ng-container>
+      <app-code-highlighter [code]="configCode"> </app-code-highlighter>
+    </app-installation-step>
+    <app-installation-step [stepNumber]="3">
+      <span slot="title">Step 3 - Add intro-id Attributes to Elements</span>
+      <ng-container slot="description">
+        Each element that should be highlighted in the intro must have an
+        intro-id attribute. The value of this attribute should match the
+        elementSelectorToFocus field in the intro configuration.
+      </ng-container>
+      <app-code-highlighter [code]="targetItemSample"></app-code-highlighter>
+    </app-installation-step>
+    <app-installation-step [stepNumber]="4">
+      <span slot="title">Step 4 - Provide Intro Items</span>
+      <ng-container slot="description">
+        In your app.config.ts, add NgxIntroService to the providers list and
+        configure the behavior using provideIntroConfig:
+      </ng-container>
+      <app-code-highlighter [code]="demoCode"></app-code-highlighter>
     </app-installation-step>
   `,
-  imports: [InstallationStepComponent],
+  imports: [InstallationStepComponent, CodeHighlighterComponent],
 })
-export default class InstallationComponent {}
+export default class InstallationComponent {
+  installationCode = `
+  npm install ngx-intro`;
+
+  configCode = `
+  import { ApplicationConfig } from '@angular/core';
+  import { NgxIntroService, provideIntroConfig } from 'ngx-intro';
+
+  export const appConfig: ApplicationConfig = {
+    providers: [
+      NgxIntroService,
+      provideIntroConfig({
+        closeOnBackdropClick: true,
+        closeOnEsc: false,
+      }),
+    ],
+  };`;
+
+  demoCode = `
+  intros: IntroItem[] = [
+    {
+      title: 'Item 1',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      elementSelectorToFocus: 'item-1',
+    },
+    {
+      title: 'Item 2',
+      description: 'This is the second item',
+      elementSelectorToFocus: 'item-2',
+    },
+    {
+      title: 'Item 3',
+      description: 'This is the third item',
+      elementSelectorToFocus: 'item-3',
+    },
+  ];
+
+  start() {
+    this.ngxIntroService.start(this.intros);
+  }`;
+
+  targetItemSample = `
+  <span intro-id="item-1">Dashboard</span>
+  <span intro-id="item-2">Team</span>`;
+}

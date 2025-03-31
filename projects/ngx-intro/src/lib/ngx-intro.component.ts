@@ -4,7 +4,6 @@ import {
   computed,
   ElementRef,
   inject,
-  input,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgClass } from '@angular/common';
@@ -73,12 +72,16 @@ export class NgxIntroComponent {
   public elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private introService = inject(NgxIntroService);
 
-  allItems = computed(() =>this.introService.intros());
+  allItems = computed(() => this.introService.intros());
   currActiveIdx = computed(() => this.introService.currIdx());
-  currItem = computed<IntroItem | undefined>(() => this.introService.intros()?.[this.currActiveIdx()]);
+  currItem = computed<IntroItem | undefined>(
+    () => this.introService.intros()?.[this.currActiveIdx()],
+  );
 
   hasPrevious = computed(() => this.introService.currIdx() > 0);
-  hasNext = computed(() => this.introService.currIdx() < this.introService.intros().length - 1);
+  hasNext = computed(
+    () => this.introService.currIdx() < this.allItems().length - 1,
+  );
 
   prev() {
     this.introService.prev();

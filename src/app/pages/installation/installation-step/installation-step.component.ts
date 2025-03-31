@@ -11,7 +11,8 @@ import CodeHighlighterComponent from '../../../components/code-highlighter/code-
       >
         <ng-content select="[slot=title]"></ng-content>
       </h2>
-      <app-code-highlighter>npm install ngx-intro </app-code-highlighter>
+      <p><ng-content select="[slot=description]"></ng-content></p>
+      <ng-content></ng-content>
     </div>
   `,
   styles: [
@@ -35,10 +36,7 @@ import CodeHighlighterComponent from '../../../components/code-highlighter/code-
   host: {
     class: 'relative',
   },
-  imports: [CodeHighlighterComponent],
 })
 export class InstallationStepComponent {
-  code = input('');
-  language = input('javascript');
   stepNumber = input.required<number>();
 }

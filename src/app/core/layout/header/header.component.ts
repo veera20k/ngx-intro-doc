@@ -6,7 +6,7 @@ import { Component, output } from '@angular/core';
       <img src="/images/logo.png" alt="logo" class="h-6 w-6" />
       <h1 class="text-lg">Ngx Intro</h1>
     </div>
-    <div class="flex gap-2">
+    <div class="flex gap-2 cursor-pointer items-center" (click)="redirect()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -28,4 +28,8 @@ import { Component, output } from '@angular/core';
 })
 export default class HeaderComponent {
   sidebarToggle = output();
+
+  redirect() {
+    window.open("https://github.com/veera20k/ngx-intro-doc", "_blank");
+  }
 }

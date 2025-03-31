@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import CopyButtonComponent from '../copy-button/copy-button.component';
 
 @Component({
   selector: 'app-code-highlighter',
   template: `
-    <pre class="overflow-x-auto rounded-md border border-slate-200 bg-slate-50">
-    <header class="border-b border-slate-200 px-3 flex justify-between items-center py-1">
-        <span>npm</span>
-        <app-copy-button/> 
-        </header>
-        <code>
-         <ng-content></ng-content>
-        </code>
-    </pre>
+    <header
+      class="border-b border-slate-200 px-3 flex justify-between items-center py-1"
+    >
+      <span>npm</span><app-copy-button [text]="code()" />
+    </header>
+    <pre class="!p-0 !m-0 relative text-wrap">
+      {{ code() }}
+    </pre
+    >
   `,
   host: {
-    class: 'text-sm',
+    class: 'text-sm border border-slate-200 bg-slate-50 rounded-lg ',
   },
   imports: [CopyButtonComponent],
 })
-export default class CodeHighlighterComponent {}
+export default class CodeHighlighterComponent {
+  code = input.required<string>();
+}

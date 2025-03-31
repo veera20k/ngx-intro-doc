@@ -1,6 +1,13 @@
 {
   "name": "ngx-intro",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "description": "An Angular intro tour guide library.",
+  "author": "Veera",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/veera20k/ngx-intro-doc"
+  },
   "peerDependencies": {
     "@angular/common": ">=17.0.0 <20.0.0",
     "@angular/core": ">=17.0.0 <20.0.0"

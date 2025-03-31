@@ -1,63 +1,96 @@
-# NgxIntro
+# ngx-intro
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+`ngx-intro` is an Angular library that provides an easy way to create guided tours for your Angular applications. It supports **Angular v17+** and allows configurable onboarding experiences using Angular's dependency injection system.
 
-## Code scaffolding
+## Installation
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+To install `ngx-intro`, run:
 
-```bash
-ng generate component component-name
+```sh
+npm install ngx-intro
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Configuration
 
-```bash
-ng generate --help
+To use `ngx-intro`, provide `NgxIntroService` in your `app.config.ts` and configure the settings as needed.
+
+### Step 1: Provide `NgxIntroService` and Configure Settings
+
+In your `app.config.ts`, add `NgxIntroService` to the providers list and configure the behavior using `provideIntroConfig`:
+
+```typescript
+import { ApplicationConfig } from '@angular/core';
+import { NgxIntroService, provideIntroConfig } from 'ngx-intro';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    NgxIntroService,
+    provideIntroConfig({
+      closeOnBackdropClick: true,
+      closeOnEsc: false,
+    }),
+  ],
+};
 ```
 
-## Building
+### Step 2: Add `intro-id` Attributes to Elements
 
-To build the library, run:
+Each element that should be highlighted in the intro must have an `intro-id` attribute. The value of this attribute should match the `elementSelectorToFocus` field in the intro configuration.
 
-```bash
-ng build ngx-intro
+Example:
+
+```html
+<span intro-id="item-1">Dashboard</span>
+<span intro-id="item-2">Team</span>
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+### Step 3: Start the Intro Tour with Your Items
 
-### Publishing the Library
+You need to define your intro steps (`IntroItem[]`) and pass them to the `start` method of `NgxIntroService`.
 
-Once the project is built, you can publish your library by following these steps:
+```typescript
+import { Component, inject } from '@angular/core';
+import { NgxIntroService } from 'ngx-intro';
+import { IntroItem } from 'ngx-intro-model';
 
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-intro
-   ```
+@Component({
+  selector: 'app-demo',
+  template: `<button (click)="start()">Start Tour</button>`
+})
+export class DemoComponent {
+  private ngxIntroService = inject(NgxIntroService);
 
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
+  intros: IntroItem[] = [
+    {
+      title: 'Item 1',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      elementSelectorToFocus: 'item-1',
+    },
+    {
+      title: 'Item 2',
+      description: 'This is the second item',
+      elementSelectorToFocus: 'item-2',
+    },
+    {
+      title: 'Item 3',
+      description: 'This is the third item',
+      elementSelectorToFocus: 'item-3',
+    },
+  ];
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+  start() {
+    this.ngxIntroService.start(this.intros);
+  }
+}
 ```
 
-## Running end-to-end tests
+## Requirements
+- **Angular 17+** is required.
+- Provide `NgxIntroService` in `app.config.ts`.
+- Use `provideIntroConfig` to configure the behavior of the intro.
+- Add `intro-id` attributes to elements and ensure the values match `elementSelectorToFocus` in `IntroItem[]`.
+- Pass your intro steps (`IntroItem[]`) to the `start` method.
 
-For end-to-end (e2e) testing, run:
+## License
+This project is licensed under the **MIT License**.
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
