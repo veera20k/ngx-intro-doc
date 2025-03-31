@@ -12,7 +12,7 @@ import CodeHighlighterComponent from '../../components/code-highlighter/code-hig
     </p>
     <h2 class="text-xl font-bold mt-6">Prerequisites</h2>
     <p class="mt-2">
-      Before installing YourLibraryName, ensure you have the following:
+      Before installing Ngx Intro, ensure you have the following:
     </p>
     <ul class="mt-2 ml-8 list-disc">
       <li>Angular CLI installed (version 17 or higher).</li>

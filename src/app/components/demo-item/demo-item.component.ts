@@ -8,7 +8,7 @@ import { NgxIntroService } from '../../../../projects/ngx-intro/src/lib/ngx-intr
   template: `
     <main class="flex justify-center">
       <nav class="bg-gray-800 rounded-md">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl px-2">
           <div class="relative flex h-16 items-center justify-between">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
@@ -54,13 +54,6 @@ import { NgxIntroService } from '../../../../projects/ngx-intro/src/lib/ngx-intr
             <div
               class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
             >
-              <div class="flex shrink-0 items-center">
-                <img
-                  class="h-8 w-auto"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  alt="Your Company"
-                />
-              </div>
               <div class="hidden sm:ml-6 sm:block">
                 <div class="flex space-x-4">
                   <a

@@ -8,9 +8,9 @@ import { Component } from '@angular/core';
       ngx-intro is a lightweight, easy-to-use Angular library designed to
       simplify the process of creating interactive and user-friendly onboarding
       experiences for your web applications. Whether you're building a complex
-      enterprise application or a simple website, ngx-intro helps you guide users
-      through your app's features with step-by-step tutorials, tooltips, and
-      walkthroughs.
+      enterprise application or a simple website, ngx-intro helps you guide
+      users through your app's features with step-by-step tutorials, tooltips,
+      and walkthroughs.
     </p>
     <h3 class="text-2xl font-bold mt-8">Why ngx-intro?</h3>
     <p class="mt-2">
@@ -27,28 +27,44 @@ import { Component } from '@angular/core';
       can help you guide users through your app's features with step-by-step
       tutorials, tooltips, and walkthroughs.
     </p>
-    <h3 class="text-2xl font-bold mt-8">Key Features</h3>
+    <h3 class="text-2xl font-bold mt-8">Current Features:</h3>
     <ul class="list-disc ml-8 mt-2">
       <li>
-        <span class="font-semibold">Step-by-Step Guides :</span> Create
-        multi-step tutorials to walk users through your app's features.
+        <span class="font-semibold">Customizable Behavior:</span> Configure the
+        onboarding experience to match your application's needs.
       </li>
       <li>
-        <span class="font-semibold">Tooltips and Highlights :</span> Draw
-        attention to specific elements on the page with interactive tooltips and
-        highlights.
+        <span class="font-semibold">Step-by-Step Guided Tours :</span> Easily
+        guide users through different sections of your app.
       </li>
       <li>
-        <span class="font-semibold">Responsive Design :</span> Works seamlessly
-        across devices, ensuring a consistent experience on desktops, tablets,
-        and mobile devices.
+        <span class="font-semibold">Element Highlighting :</span> Focus on
+        specific elements using the intro-id attribute.
       </li>
       <li>
-        <span class="font-semibold">Customizable Themes :</span> Match the
-        onboarding experience to your app's design with customizable colors,
-        fonts, and animations.
+        <span class="font-semibold">Configurable Backdrop: </span>Control
+        whether the backdrop closes on click or remains persistent.
       </li>
     </ul>
-  </div>`,
+    <h3 class="text-2xl font-bold mt-8">Future Features (Work in Progress):</h3>
+    <ul class="list-disc ml-8 mt-2">
+      <li>
+        <span class="font-semibold">Customizable Themes:</span> Ability to style
+        the onboarding experience with different themes.
+      </li>
+      <li>
+        <span class="font-semibold"
+          >Responsive Design for Mobile Devices :</span
+        >
+        Improved support for mobile-friendly guided tours.
+      </li>
+      <li>
+        <span class="font-semibold"
+          >Ability to Add Images in Descriptions :</span
+        >
+        Enhance onboarding steps with images alongside text.
+      </li>
+    </ul>
+  </div> `,
 })
 export default class IntroductionComponent {}
