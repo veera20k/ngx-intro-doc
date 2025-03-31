@@ -4,7 +4,7 @@ import { Component, output } from '@angular/core';
   selector: 'app-header',
   template: `<div class="flex gap-2 items-center">
       <img src="/images/logo.png" alt="logo" class="h-6 w-6" />
-      <h1 class="text-lg">Ng Intro</h1>
+      <h1 class="text-lg">Ngx Intro</h1>
     </div>
     <div class="flex gap-2">
       <svg

@@ -7,58 +7,92 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
-import { IntroItem, IntroPopupPosition } from './ngx-model';
+import { NgClass } from '@angular/common';
+
+import { IntroItem } from './ngx-intro-model';
 import { NgxIntroService } from './ngx-intro.service';
 
 @Component({
-  selector: 'lib-ngx-intro',
-  imports: [],
-  template: ` <header class="ng-intro-header">
-      {{ item()?.title }}
+  selector: 'ngx-intro',
+  template: `
+    <header>
+      {{ currItem()?.title }}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        class="close-icon"
+        viewBox="0 0 16 16"
+        (click)="end()"
+      >
+        <path
+          d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+        />
+      </svg>
     </header>
-    <p class="ng-intro-description">
-      {{ item()?.description }}
-    </p>
-    <footer class="ng-intro-footer">
-      <button
-        [disabled]="!isPrevExist()"
-        class="prev ng-intro-button"
-        (click)="prevClick()"
-        type="button"
-      >
-        Prev
-      </button>
-      <button
-        [disabled]="!isNextExist()"
-        class="next ng-intro-button"
-        (click)="nextClkick()"
-        type="button"
-      >
-        Next
-      </button>
-    </footer>`,
-  styleUrl: './ngx-intro-style.scss',
+    <main>{{ currItem()?.description }}</main>
+    <footer>
+      <div class="pagination-items">
+        @for (paginationItem of allItems(); track $index) {
+          <div
+            class="pagination-item"
+            [title]="paginationItem.title"
+            [ngClass]="{ active: $index === currActiveIdx() }"
+            (click)="goTo($index)"
+          ></div>
+        }
+      </div>
+      <div class="actions">
+        <button
+          [disabled]="!hasPrevious()"
+          (click)="prev()"
+          class="prev"
+          type="button"
+        >
+          Prev
+        </button>
+        <button
+          [disabled]="!hasNext()"
+          (click)="next()"
+          class="next"
+          type="button"
+        >
+          Next
+        </button>
+      </div>
+    </footer>
+  `,
   host: {
-    class: 'ng-intro-component',
+    class: 'ngx-intro-component',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NgClass],
 })
 export class NgxIntroComponent {
-  item = input<IntroItem | null>(null);
-  position = input<IntroPopupPosition>('top');
   public elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   private introService = inject(NgxIntroService);
-  isPrevExist = computed(() => this.introService.currIdx() > 0);
-  isNextExist = computed(
-    () => this.introService.currIdx() < this.introService.intros.length - 1,
-  );
 
-  prevClick() {
+  allItems = computed(() =>this.introService.intros());
+  currActiveIdx = computed(() => this.introService.currIdx());
+  currItem = computed<IntroItem | undefined>(() => this.introService.intros()?.[this.currActiveIdx()]);
+
+  hasPrevious = computed(() => this.introService.currIdx() > 0);
+  hasNext = computed(() => this.introService.currIdx() < this.introService.intros().length - 1);
+
+  prev() {
     this.introService.prev();
   }
 
-  nextClkick() {
+  next() {
     this.introService.next();
+  }
+
+  goTo(index: number) {
+    this.introService.goTo(index);
+  }
+
+  end() {
+    this.introService.end();
   }
 }

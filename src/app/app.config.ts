@@ -8,10 +8,17 @@ import {
 } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideIntroConfig } from '../../projects/ngx-intro/src/lib/ngx-intro-config';
+import { NgxIntroService } from '../../projects/ngx-intro/src/public-api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
+    NgxIntroService,
+    provideIntroConfig({
+      closeOnBackdropClick: true,
+      closeOnEsc: false,
+    }),
     provideRouter(
       routes,
       withViewTransitions(),
@@ -19,7 +26,7 @@ export const appConfig: ApplicationConfig = {
         anchorScrolling: 'enabled',
         scrollPositionRestoration: 'enabled',
       }),
-      withPreloading(PreloadAllModules)
+      withPreloading(PreloadAllModules),
     ),
   ],
 };

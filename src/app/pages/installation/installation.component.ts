@@ -21,7 +21,7 @@ import { InstallationStepComponent } from './installation-step/installation-step
       </li>
     </ul>
 
-    <table
+    <!-- <table
       class="w-1/2 mx-auto text-sm text-left rtl:text-right text-gray-500 mt-6 border border-slate-200 border-separate"
     >
       <thead class="text-xs text-gray-700 bg-gray-50 ">
@@ -44,7 +44,7 @@ import { InstallationStepComponent } from './installation-step/installation-step
           <td class="px-6 py-4">19.x</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
     <br />
     <app-installation-step [stepNumber]="1">
       <span slot="title">Step 1 - Installation</span>

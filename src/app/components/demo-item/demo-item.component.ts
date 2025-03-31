@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../ui/button/button.component';
-import { IntroItem, NgxIntroService } from 'ngx-intro';
+import { IntroItem } from '../../../../projects/ngx-intro/src/lib/ngx-intro-model';
+import { NgxIntroService } from '../../../../projects/ngx-intro/src/lib/ngx-intro.service';
 
 @Component({
   selector: 'app-demo-item',
@@ -135,7 +136,7 @@ import { IntroItem, NgxIntroService } from 'ngx-intro';
               href="#"
               class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
               >Projects</a
-            >
+            > 
             <a
               href="#"
               class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
@@ -158,7 +159,7 @@ export default class DemoItemComponent {
   intros: IntroItem[] = [
     {
       title: 'Item 1',
-      description: 'This is the first item',
+      description: 'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
       elementSelectorToFocus: 'item-1',
     },
     {
